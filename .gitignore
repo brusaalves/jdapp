@@ -1,0 +1,15 @@
+# eclipse files
+.settings
+.classpath
+.project
+
+# vscode files
+.vscode
+
+# IntelliJ files
+.idea
+*.iml
+.attach*
+
+# Maven files
+target

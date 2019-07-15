@@ -1,0 +1,20 @@
+version: '3'
+networks:
+  java-app-network:
+    ipam: 
+      driver: default
+      config:
+        - subnet: $NETWORK_SUBNET
+services:
+  java:
+    image: openjdk:$OPENJDK_VERSION
+    container_name: java-app-$MODULE_NAME
+    volumes:
+      - ./../app/build/jar:/usr/src/app/
+    working_dir: /usr/src/app
+    command: java -jar $MODULE_NAME-$MODULE_VERSION.jar
+    networks: 
+      java-app-network:
+        ipv4_address: $IP
+    ports: 
+      - $PORT:8080
