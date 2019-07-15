@@ -4,10 +4,10 @@ networks:
     ipam: 
       driver: default
       config:
-        - subnet: $NETWORK_SUBNET
+        - subnet: $ENV_SUBNET
 services:
   java:
-    image: openjdk:$OPENJDK_VERSION
+    image: $ENV_OPENJDK
     container_name: java-app-$MODULE_NAME
     volumes:
       - ./../app/bin/jar:/usr/src/app/
@@ -15,6 +15,6 @@ services:
     command: java -jar $MODULE_NAME-$MODULE_VERSION.jar
     networks: 
       java-app-network:
-        ipv4_address: $IP
+        ipv4_address: $MODULE_IP
     ports: 
-      - $PORT:8080
+      - $MODULE_PORT:8080

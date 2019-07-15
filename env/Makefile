@@ -11,7 +11,7 @@ run-mvn:
 		-v "$(BASE_DIR)/app/bin/jar":/usr/src/app/build \
 		-v "$(BASE_DIR)/app/maven/resources":/root/.m2 \
 		-w /usr/src/app \
-		maven:$(MAVEN_VERSION) mvn $(command)
+		$(ENV_MAVEN) mvn $(command)
 
 # MAVEN
 mvn-clean:
