@@ -10,7 +10,7 @@ services:
     image: openjdk:$OPENJDK_VERSION
     container_name: java-app-$MODULE_NAME
     volumes:
-      - ./../app/build/jar:/usr/src/app/
+      - ./../app/bin/jar:/usr/src/app/
     working_dir: /usr/src/app
     command: java -jar $MODULE_NAME-$MODULE_VERSION.jar
     networks: 

@@ -8,7 +8,7 @@ include .env
 run-mvn:
 	docker run -it --rm --name maven \
 		-v "$(BASE_DIR)/app/maven/modules/$(MODULE_NAME)":/usr/src/app \
-		-v "$(BASE_DIR)/app/build/jar":/usr/src/app/build \
+		-v "$(BASE_DIR)/app/bin/jar":/usr/src/app/build \
 		-v "$(BASE_DIR)/app/maven/resources":/root/.m2 \
 		-w /usr/src/app \
 		maven:$(MAVEN_VERSION) mvn $(command)
