@@ -1,5 +1,5 @@
 # DEFAULT CONFIG
-BASE_DIR=$(shell cd .. && pwd)
+BASE_DIR=$(shell pwd)
 
 # IMPORT VARIABLES
 include .env
@@ -7,9 +7,9 @@ include .env
 # RUN MAVEN
 run-mvn:
 	docker run -it --rm --name maven \
-		-v "$(BASE_DIR)/app/maven/modules/$(MODULE_NAME)":/usr/src/app \
-		-v "$(BASE_DIR)/app/bin/jar":/usr/src/app/build \
-		-v "$(BASE_DIR)/app/maven/resources":/root/.m2 \
+		-v "$(BASE_DIR)/app/modules/$(MODULE_NAME)":/usr/src/app \
+		-v "$(BASE_DIR)/bin/jar/":/usr/src/app/build \
+		-v "$(BASE_DIR)/app/resources/maven":/root/.m2 \
 		-w /usr/src/app \
 		$(ENV_MAVEN) mvn $(command)
 
@@ -22,6 +22,8 @@ mvn-clean-install:
 	make run-mvn command="clean install"
 mvn-dependency-resolve:
 	make run-mvn command="dependency:resolve"
+mvn-package:
+	make run-mvn command="package"
 # IN TESTS
 # mvn-generate:
 # 	make run-mvn command="archetype:generate"

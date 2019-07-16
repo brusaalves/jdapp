@@ -1,6 +1,6 @@
 version: '3'
 networks:
-  java-app-network:
+  java-docker-app-network:
     ipam: 
       driver: default
       config:
@@ -8,13 +8,14 @@ networks:
 services:
   java:
     image: $ENV_OPENJDK
-    container_name: java-app-$MODULE_NAME
+    container_name: java-docker-app_$MODULE_NAME
     volumes:
-      - ./../app/bin/jar:/usr/src/app/
+      - ./bin/jar:/usr/src/app
+      - ./app/resources/tomcat:/tmp
     working_dir: /usr/src/app
     command: java -jar $MODULE_NAME-$MODULE_VERSION.jar
     networks: 
-      java-app-network:
+      java-docker-app-network:
         ipv4_address: $MODULE_IP
     ports: 
       - $MODULE_PORT:8080
