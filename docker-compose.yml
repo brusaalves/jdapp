@@ -11,7 +11,6 @@ services:
     container_name: java-docker-app_$MODULE_NAME
     volumes:
       - ./bin/jar:/usr/src/app
-      - ./app/resources/tomcat:/tmp
     working_dir: /usr/src/app
     command: java -jar $MODULE_NAME-$MODULE_VERSION.jar
     networks: 
