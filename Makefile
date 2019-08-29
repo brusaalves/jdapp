@@ -6,12 +6,7 @@ include .env
 
 # RUN MAVEN
 run-mvn:
-	docker run -it --rm --name maven \
-		-v "$(BASE_DIR)/app/modules/$(MODULE_NAME)":/usr/src/app \
-		-v "$(BASE_DIR)/bin/jar/":/usr/src/app/build \
-		-v "$(BASE_DIR)/app/resources/maven":/root/.m2 \
-		-w /usr/src/app \
-		$(ENV_MAVEN) mvn $(command)
+	make run-docker command="run --rm maven mvn $(command)"
 
 # MAVEN
 mvn-clean:
@@ -24,9 +19,6 @@ mvn-dependency-resolve:
 	make run-mvn command="dependency:resolve"
 mvn-package:
 	make run-mvn command="package"
-# IN TESTS
-# mvn-generate:
-# 	make run-mvn command="archetype:generate"
 
 # RUN DOCKER
 run-docker:

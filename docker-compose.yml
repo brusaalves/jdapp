@@ -19,3 +19,13 @@ services:
         ipv4_address: $MODULE_IP
     ports: 
       - $MODULE_PORT:8080
+  maven:
+    image: $ENV_MAVEN
+    container_name: java-docker-app_maven
+    working_dir: /usr/src/app
+    networks: 
+      java-docker-app-network:
+    volumes:
+      - ./app/resources/maven:/root/.m2
+      - ./bin/jar:/usr/src/app/build
+      - ./app/modules/$MODULE_NAME:/usr/src/app
