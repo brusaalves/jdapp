@@ -1,0 +1,31 @@
+version: '3'
+networks:
+  jdapp-network:
+    ipam: 
+      driver: default
+      config:
+        - subnet: $ENV_SUBNET
+services:
+  java:
+    image: $ENV_OPENJDK
+    container_name: jdapp_$MODULE_NAME
+    volumes:
+      - ./../app/modules/$MODULE_NAME/target/$MODULE_PACKAGE:/usr/src/app/$MODULE_PACKAGE
+    working_dir: /usr/src/app
+    command: $MODULE_COMMAND $MODULE_PACKAGE
+    networks: 
+      jdapp-network:
+        ipv4_address: $MODULE_IP
+    ports: 
+      - $MODULE_ACCESS_PORT:$MODULE_PORT
+    depends_on: 
+      - maven
+  maven:
+    image: $ENV_MAVEN
+    container_name: jdapp_maven
+    working_dir: /usr/src/app
+    networks: 
+      jdapp-network:
+    volumes:
+      - ./../app/resources/maven:/root/.m2
+      - ./../app/modules/$MODULE_NAME:/usr/src/app

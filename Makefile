@@ -2,7 +2,7 @@
 BASE_DIR=$(shell pwd)
 
 # IMPORT VARIABLES
-include .env
+include env/.env
 
 # RUN MAVEN
 run-mvn:
@@ -22,14 +22,12 @@ mvn-package:
 
 # RUN DOCKER
 run-docker:
-	docker-compose $(command)
+	cd env && docker-compose $(command)
 
 # DOCKER
 docker-up:
-	make mvn-clean-install && \
 	make run-docker command="up -d"
 docker-down:
-	make mvn-clean && \
 	make run-docker command="down"
 docker-logs:
 	make run-docker command="logs -f"
@@ -38,6 +36,8 @@ docker-ps:
 
 # START AND STOP APPLICATION
 start:
+	make mvn-clean-install && \
 	make docker-up
 stop:
+	make mvn-clean && \
 	make docker-down

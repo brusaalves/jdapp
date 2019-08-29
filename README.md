@@ -1,4 +1,4 @@
-# Java Docker App
+# JDAPP - Java Docker App
 ---
 
 ## Minimum system requirements:
