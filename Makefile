@@ -40,6 +40,8 @@ start:
 	make docker-up
 status:
 	make docker-ps
+logs:
+	make docker-logs
 stop:
 	make mvn-clean && \
 	make docker-down
