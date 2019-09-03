@@ -38,6 +38,8 @@ docker-ps:
 start:
 	make mvn-clean-install && \
 	make docker-up
+status:
+	make docker-ps
 stop:
 	make mvn-clean && \
 	make docker-down
